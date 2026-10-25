@@ -390,5 +390,15 @@
     "Transformer",
     "MCC",
     "Other"
+  ],
+  "disciplines": [
+    "01 - Civil",
+    "02 - Architectural",
+    "03 - Structural",
+    "04 - Mechanical",
+    "05 - Piping",
+    "07 - Vendor",
+    "08 - Instrumentation",
+    "09 - Electrical"
   ]
 }
