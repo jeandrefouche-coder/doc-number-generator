@@ -306,7 +306,10 @@
         "PID": "PID",
         "MBC": "Mass Balance Calcs",
         "MPD": "Material Prop Datasheets"
-      }
+      },
+      "link_types": [
+        "Process"
+      ]
     },
     "TE": {
       "name": "Technical & Engineering",
@@ -315,7 +318,11 @@
         "RPT": "Reports",
         "CAL": "Calculations",
         "DS": "Datasheet"
-      }
+      },
+      "link_types": [
+        "Area",
+        "Asset"
+      ]
     },
     "OS": {
       "name": "Operations & Safety",
@@ -325,7 +332,11 @@
         "SDS": "SDS",
         "SOP": "SOP",
         "LOG": "LOGBOOK"
-      }
+      },
+      "link_types": [
+        "Process",
+        "Area"
+      ]
     },
     "MI": {
       "name": "Maintenance, Inspection & Asset Integrity",
@@ -333,7 +344,11 @@
         "ITR": "Inspection & Testing Records",
         "MM": "Maintenance Manuals",
         "CR": "Calibration Reports"
-      }
+      },
+      "link_types": [
+        "Asset",
+        "Area"
+      ]
     },
     "CH": {
       "name": "Commission & Handover",
@@ -342,7 +357,10 @@
         "PUN": "Punchlists",
         "HA": "Handover Acceptance",
         "PF": "PF Documents"
-      }
+      },
+      "link_types": [
+        "Area"
+      ]
     },
     "LC": {
       "name": "Legal & Compliance",
@@ -351,7 +369,11 @@
         "PER": "Permits",
         "APP": "Appointments",
         "LTC": "Load Test Certificates"
-      }
+      },
+      "link_types": [
+        "Area",
+        "Process"
+      ]
     }
   }
 }
