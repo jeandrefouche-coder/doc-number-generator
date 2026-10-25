@@ -1,0 +1,34 @@
+{
+  "business_unit": [
+    "RB - Rustenburg",
+    "PL - Platinum",
+    "SM - Smelting"
+  ],
+  "lifecycle_stage": [
+    "01 - Concept",
+    "02 - Design",
+    "03 - Construction",
+    "04 - Operation",
+    "05 - Decommission"
+  ],
+  "discipline": [
+    "EL - Electrical",
+    "ME - Mechanical",
+    "CV - Civil",
+    "PR - Process",
+    "IN - Instrumentation"
+  ],
+  "document_type": [
+    "DR - Drawing",
+    "SP - Specification",
+    "RP - Report",
+    "PL - Plan",
+    "MN - Manual"
+  ],
+  "asset_code": [
+    "AST-001",
+    "AST-002",
+    "PLANT-A",
+    "FURNACE-1"
+  ]
+}
