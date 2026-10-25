@@ -71,6 +71,8 @@ else:
 
     # Value selector based on link type
     link_value = ""
+    asset_type = ""
+    asset_number = ""
     if link_type == "Area":
         area_list = cfg["areas"].get(plant, [])
         link_value = st.selectbox("Area", options=area_list) if area_list else st.text_input("Area")
@@ -78,7 +80,10 @@ else:
         process_list = cfg["processes"].get(plant, [])
         link_value = st.selectbox("Process", options=process_list) if process_list else st.text_input("Process")
     else:  # Asset
-        link_value = st.text_input("Asset", placeholder="e.g. Furnace-01 (list coming soon)")
+        asset_types = cfg.get("asset_types", ["Other"])
+        asset_type = st.selectbox("Asset Type", options=asset_types)
+        asset_number = st.text_input("Asset Number", placeholder="e.g. 001 or CV-12")
+        link_value = f"{asset_type} {asset_number}".strip()
 
     # Document Type filtered by category
     type_dict = cfg["categories"][cat]["types"]
@@ -104,8 +109,10 @@ else:
                 words = [w for w in desc.replace("&", "").replace(",", "").split() if w.upper() not in ("AND", "THE", "OF", "FOR")]
                 link_code = "".join(w[0].upper() for w in words[:4]) or "XXX"
             else:
-                # Asset — short version of what was typed
-                link_code = "".join(w[0].upper() for w in str(link_value).split()[:3]) or "AST"
+                # Asset — type code + number
+                asset_code = "".join(w[0].upper() for w in asset_type.split()[:2]) if asset_type else "AST"
+                num_part = asset_number.strip() or "000"
+                link_code = f"{asset_code}-{num_part}"
             
             number = f"{bu}-AIM-{cat}-{link_code}-{doc_type}-{int(seq):06d}"
             st.success("Generated AIM Number:")
