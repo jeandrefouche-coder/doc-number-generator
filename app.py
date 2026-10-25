@@ -62,7 +62,11 @@ else:
         else:
             link_value = st.text_input("Area (no list loaded yet)")
     elif link_type == "Process":
-        link_value = st.text_input("Process (list coming soon)", placeholder="e.g. Smelting Process")
+        process_list = cfg["processes"].get(plant, [])
+        if process_list:
+            link_value = st.selectbox("Process", options=process_list)
+        else:
+            link_value = st.text_input("Process (no list for this plant yet)", placeholder="e.g. Smelting Process")
     else:
         link_value = st.text_input("Asset (list coming soon)", placeholder="e.g. Furnace-01")
 
@@ -89,7 +93,7 @@ else:
         if not link_value.strip():
             st.error("Please select or enter a Process / Area / Asset")
         else:
-            # Extract short code from area if possible
+            # Extract short code from area/process if possible
             link_code = link_value.split(" - ")[0] if " - " in link_value else link_value[:12]
             number = f"{bu}-{plant}-AIM-{link_type[:3].upper()}-{link_code}-{cat}-{doc_type}-{int(seq):04d}"
             st.success("Generated AIM Number:")
@@ -97,4 +101,4 @@ else:
             st.download_button("Download", number, file_name="aim_number.txt")
 
 st.divider()
-st.caption("This is a test version. Process and Asset lists can be added next. Codes are placeholders where not yet defined.")
+st.caption("Test version. Areas left as original. Processes extracted from area lists. Asset lists still to be added. Codes are placeholders where not yet defined.")
