@@ -82,7 +82,7 @@ else:
     else:  # Asset
         asset_types = cfg.get("asset_types", ["Other"])
         asset_type = st.selectbox("Asset Type", options=asset_types)
-        asset_number = st.text_input("Asset Number", placeholder="e.g. 001 or CV-12")
+        asset_number = st.text_input("Asset Number (3 digits)", placeholder="001", max_chars=3)
         link_value = f"{asset_type} {asset_number}".strip()
 
     # Document Type filtered by category
@@ -93,6 +93,11 @@ else:
         options=type_codes,
         format_func=lambda c: type_dict[c]
     )
+
+    # Discipline (especially relevant for drawings)
+    disc_list = cfg.get("disciplines", [])
+    discipline = st.selectbox("Discipline", options=disc_list) if disc_list else ""
+    disc_code = discipline.split(" - ")[0].strip() if discipline and " - " in discipline else ""
 
     seq = st.number_input("Sequential Number", min_value=1, value=1, step=1)
 
@@ -111,10 +116,10 @@ else:
             else:
                 # Asset — type code + number
                 asset_code = "".join(w[0].upper() for w in asset_type.split()[:2]) if asset_type else "AST"
-                num_part = asset_number.strip() or "000"
+                num_part = asset_number.strip().zfill(3)[:3] or "000"
                 link_code = f"{asset_code}-{num_part}"
             
-            number = f"{bu}-AIM-{cat}-{link_code}-{doc_type}-{int(seq):06d}"
+            number = f"{bu}-AIM-{cat}-{link_code}-{doc_type}-{disc_code}-{int(seq):06d}" if disc_code else f"{bu}-AIM-{cat}-{link_code}-{doc_type}-{int(seq):06d}"
             st.success("Generated AIM Number:")
             st.code(number)
             st.download_button("Download", number, file_name="aim_number.txt")
