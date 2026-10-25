@@ -1,5 +1,6 @@
 import streamlit as st
 import json
+import random
 
 st.set_page_config(page_title="Document Number Generator", layout="wide")
 
@@ -39,13 +40,12 @@ st.divider()
 if is_pim:
     st.subheader("PIM Path")
     vote = st.text_input("Vote Number (Project Number)", placeholder="e.g. V2026-0142")
-    seq = st.number_input("Sequential Number", min_value=1, value=1, step=1)
-    
     if st.button("Generate PIM Number", type="primary"):
         if not vote.strip():
             st.error("Please enter a Vote Number")
         else:
-            number = f"{bu}-{plant}-PIM-{vote.strip().upper()}-{int(seq):04d}"
+            seq = random.randint(100000, 999999)
+            number = f"{bu}-{plant}-PIM-{vote.strip().upper()}-{seq}"
             st.success("Generated PIM Number:")
             st.code(number)
             st.download_button("Download", number, file_name="pim_number.txt")
@@ -80,10 +80,14 @@ else:
         process_list = cfg["processes"].get(plant, [])
         link_value = st.selectbox("Process", options=process_list) if process_list else st.text_input("Process")
     else:  # Asset
-        asset_types = cfg.get("asset_types", ["Other"])
-        asset_type = st.selectbox("Asset Type", options=asset_types)
+        asset_types = cfg.get("asset_types", {"OT": "Other"})
+        asset_code = st.selectbox(
+            "Asset Type",
+            options=list(asset_types.keys()),
+            format_func=lambda c: f"{asset_types[c]} ({c})"
+        )
         asset_number = st.text_input("Asset Number (3 digits)", placeholder="001", max_chars=3)
-        link_value = f"{asset_type} {asset_number}".strip()
+        link_value = f"{asset_types[asset_code]} {asset_number}".strip()
 
     # Document Type filtered by category
     type_dict = cfg["categories"][cat]["types"]
@@ -102,8 +106,6 @@ else:
             discipline = st.selectbox("Discipline", options=disc_list)
             disc_code = discipline.split(" - ")[0].strip() if " - " in discipline else ""
 
-    seq = st.number_input("Sequential Number", min_value=1, value=1, step=1)
-
     if st.button("Generate AIM Number", type="primary"):
         if not str(link_value).strip():
             st.error("Please select or enter a Process / Area / Asset")
@@ -117,12 +119,12 @@ else:
                 words = [w for w in desc.replace("&", "").replace(",", "").split() if w.upper() not in ("AND", "THE", "OF", "FOR")]
                 link_code = "".join(w[0].upper() for w in words[:4]) or "XXX"
             else:
-                # Asset — type code + number
-                asset_code = "".join(w[0].upper() for w in asset_type.split()[:2]) if asset_type else "AST"
+                # Asset — use the selected short code + 3-digit number
                 num_part = asset_number.strip().zfill(3)[:3] or "000"
                 link_code = f"{asset_code}-{num_part}"
             
-            number = f"{bu}-AIM-{cat}-{link_code}-{doc_type}-{disc_code}-{int(seq):06d}" if disc_code else f"{bu}-AIM-{cat}-{link_code}-{doc_type}-{int(seq):06d}"
+            seq = random.randint(100000, 999999)
+            number = f"{bu}-AIM-{cat}-{link_code}-{doc_type}-{disc_code}-{seq}" if disc_code else f"{bu}-AIM-{cat}-{link_code}-{doc_type}-{seq}"
             st.success("Generated AIM Number:")
             st.code(number)
             st.download_button("Download", number, file_name="aim_number.txt")
