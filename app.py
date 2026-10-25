@@ -95,10 +95,17 @@ else:
         if not str(link_value).strip():
             st.error("Please select or enter a Process / Area / Asset")
         else:
-            # Build short code from the description (e.g. SLAG GRANULATION & HANDLING → SGH)
-            desc = link_value.split(" - ", 1)[-1] if " - " in str(link_value) else str(link_value)
-            words = [w for w in desc.replace("&", "").replace(",", "").split() if w.upper() not in ("AND", "THE", "OF", "FOR")]
-            link_code = "".join(w[0].upper() for w in words[:4]) or "XXX"
+            if link_type == "Area":
+                # Use the area number (e.g. 321)
+                link_code = link_value.split(" - ")[0].strip() if " - " in str(link_value) else str(link_value)[:8]
+            elif link_type == "Process":
+                # Use acronym from description (e.g. RAW MATERIALS HANDLING → RMH)
+                desc = link_value.split(" - ", 1)[-1] if " - " in str(link_value) else str(link_value)
+                words = [w for w in desc.replace("&", "").replace(",", "").split() if w.upper() not in ("AND", "THE", "OF", "FOR")]
+                link_code = "".join(w[0].upper() for w in words[:4]) or "XXX"
+            else:
+                # Asset — short version of what was typed
+                link_code = "".join(w[0].upper() for w in str(link_value).split()[:3]) or "AST"
             
             number = f"{bu}-AIM-{cat}-{link_code}-{doc_type}-{int(seq):06d}"
             st.success("Generated AIM Number:")
