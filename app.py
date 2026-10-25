@@ -52,31 +52,33 @@ if is_pim:
 
 else:
     st.subheader("AIM Path")
-    link_type = st.radio("Link To", ["Process", "Area", "Asset"], horizontal=True)
-    
-    link_value = ""
-    if link_type == "Area":
-        area_list = cfg["areas"].get(plant, [])
-        if area_list:
-            link_value = st.selectbox("Area", options=area_list)
-        else:
-            link_value = st.text_input("Area (no list loaded yet)")
-    elif link_type == "Process":
-        process_list = cfg["processes"].get(plant, [])
-        if process_list:
-            link_value = st.selectbox("Process", options=process_list)
-        else:
-            link_value = st.text_input("Process (no list for this plant yet)", placeholder="e.g. Smelting Process")
-    else:
-        link_value = st.text_input("Asset (list coming soon)", placeholder="e.g. Furnace-01")
 
-    # Category
+    # Category first — drives the allowed link type
     cat_codes = list(cfg["categories"].keys())
     cat = st.selectbox(
         "Category",
         options=cat_codes,
         format_func=lambda c: cfg["categories"][c]["name"]
     )
+
+    # Allowed link types for this category
+    allowed = cfg["categories"][cat].get("link_types", ["Area", "Process", "Asset"])
+    if len(allowed) == 1:
+        link_type = allowed[0]
+        st.info(f"Linked to: **{link_type}**")
+    else:
+        link_type = st.radio("Link To", allowed, horizontal=True)
+
+    # Value selector based on link type
+    link_value = ""
+    if link_type == "Area":
+        area_list = cfg["areas"].get(plant, [])
+        link_value = st.selectbox("Area", options=area_list) if area_list else st.text_input("Area")
+    elif link_type == "Process":
+        process_list = cfg["processes"].get(plant, [])
+        link_value = st.selectbox("Process", options=process_list) if process_list else st.text_input("Process")
+    else:  # Asset
+        link_value = st.text_input("Asset", placeholder="e.g. Furnace-01 (list coming soon)")
 
     # Document Type filtered by category
     type_dict = cfg["categories"][cat]["types"]
@@ -90,15 +92,14 @@ else:
     seq = st.number_input("Sequential Number", min_value=1, value=1, step=1)
 
     if st.button("Generate AIM Number", type="primary"):
-        if not link_value.strip():
+        if not str(link_value).strip():
             st.error("Please select or enter a Process / Area / Asset")
         else:
-            # Extract short code from area/process if possible
-            link_code = link_value.split(" - ")[0] if " - " in link_value else link_value[:12]
+            link_code = link_value.split(" - ")[0] if " - " in str(link_value) else str(link_value)[:12]
             number = f"{bu}-{plant}-AIM-{link_type[:3].upper()}-{link_code}-{cat}-{doc_type}-{int(seq):04d}"
             st.success("Generated AIM Number:")
             st.code(number)
             st.download_button("Download", number, file_name="aim_number.txt")
 
 st.divider()
-st.caption("Test version. Areas left as original. Processes extracted from area lists. Asset lists still to be added. Codes are placeholders where not yet defined.")
+st.caption("Category now drives whether you link to Process, Area or Asset. Processes extracted from area lists (areas left unchanged).")
