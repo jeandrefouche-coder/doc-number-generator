@@ -1,34 +1,279 @@
 {
-  "business_unit": [
-    "RB - Rustenburg",
-    "PL - Platinum",
-    "SM - Smelting"
-  ],
-  "lifecycle_stage": [
-    "01 - Concept",
-    "02 - Design",
-    "03 - Construction",
-    "04 - Operation",
-    "05 - Decommission"
-  ],
-  "discipline": [
-    "EL - Electrical",
-    "ME - Mechanical",
-    "CV - Civil",
-    "PR - Process",
-    "IN - Instrumentation"
-  ],
-  "document_type": [
-    "DR - Drawing",
-    "SP - Specification",
-    "RP - Report",
-    "PL - Plan",
-    "MN - Manual"
-  ],
-  "asset_code": [
-    "AST-001",
-    "AST-002",
-    "PLANT-A",
-    "FURNACE-1"
-  ]
+  "business_units": {
+    "ACD": {
+      "name": "Waterval Complex",
+      "plants": {
+        "WS": "Waterval Smelter",
+        "CP": "Converter Plant",
+        "SH": "Shared"
+      }
+    },
+    "KAB": {
+      "name": "Polokwane Smelter",
+      "plants": {
+        "PS": "Polokwane Smelter"
+      }
+    },
+    "ABM": {
+      "name": "Mortimer Smelter",
+      "plants": {
+        "MS": "Mortimer Smelter"
+      }
+    }
+  },
+  "areas": {
+    "WS": [
+      "103 - ROADS AND DRAINAGE",
+      "231 - CENTRAL FILTRATION PLANT",
+      "270 - MAIN CONSUMER SUBSTATION",
+      "294 - REDRESSING JAMES TABLES",
+      "301 - FURNACE ACID PLANT",
+      "345 - SLAG GRANULATION & HANDLING",
+      "360 - GRANULATION WATER TREATMENT",
+      "400 - RECEIVING FLUX BINS",
+      "410 - PRIMARY CRUSHING",
+      "420 - SECONDARY CRUSHING",
+      "430 - FLUX STORAGE FEED CONVEYOR",
+      "431 - DUFF COAL HANDLING",
+      "440 - FLUX STORAGE BIN",
+      "450 - PIPE TRENCH",
+      "460 - CONC. PELLET BINS",
+      "461 - AFROX YARD",
+      "462 - ESKOM YARD",
+      "470 - TRANSFER HOUSE AND PELLETISING PLANT",
+      "478 - CHANGEHOUSE",
+      "480 - CONCENTRATES BUILDING",
+      "490 - BUTTNER DRYING BUILDING",
+      "491 - FLASH DRIER NO 2",
+      "492 - FLASH DRIER NO 3",
+      "493 - FLASH DRIER NO 4",
+      "494 - 2500T DRY CONCENTRATE BIN",
+      "495 - AIR COMPRESSOR",
+      "500 - PELLETISING (CANCELLED)",
+      "501 - OUTSIDE STORAGE AREA",
+      "510 - ROTO LOUVRE DRYING",
+      "511 - HT AND LT SUBSTATION",
+      "520 - TRANSFER CONVEYOR",
+      "543 - TRANSFER CONVEYOR - FLASH DRYER FEED",
+      "545 - FLASH DRIER NO 1",
+      "550 - REVERTS CRUSHING",
+      "600 - TRANSFER CONVEYOR",
+      "605 - BULK AIR COOLERS",
+      "610 - ELECTRIC FURNACE",
+      "611 - CERAMIC FILTERS FURNACE NO.1",
+      "612 - CERAMIC FILTERS FURNACE NO.2",
+      "613 - SLAG CLEANING FURNACE",
+      "615 - WFM GRANULATION",
+      "616 - SLAG GRANULATION THICKENERS",
+      "620 - CONVERTER AISLE",
+      "630 - PRECIPITATION",
+      "631 - SCF CONTROL ROOM & MCC",
+      "640 - MATTE MOULDING",
+      "650 - MATTE CRUSHING AND LOADING",
+      "660 - BRICK SHED",
+      "670 - SLAG BINS",
+      "680 - SLAG MILLING",
+      "690 - BLOWER HOUSE",
+      "700 - MAIN SUBSTATION",
+      "710 - CHANGE ROOMS",
+      "740 - RUST FURNACE SUBSTATION",
+      "750 - VEHICLE MAINTENANCE",
+      "760 - SECURITY",
+      "761 - HEAVY VEHICLE SECURITY AND WEIGHBRIDGES",
+      "770 - STORE",
+      "781 - WEIGH BRIDGE",
+      "782 - CAR PARK SOUTH",
+      "784 - AUGER SAMPLING BUILDINGS",
+      "785 - CHANGEHOUSE",
+      "786 - COMPUTER ROOM & TURNSTILES",
+      "790 - VLEI"
+    ],
+    "CP": [
+      "125 - ENTRANCE AND CHANGEHOUSES",
+      "260 - PARKING",
+      "321 - RAW MATERIALS HANDLING",
+      "322 - AUSMELT CONVERTING",
+      "323 - CONVERTER HOT GAS CLEANING",
+      "333 - SLOW COOL AISLE",
+      "345 - SLAG GRANULATION AND HANDLING",
+      "346 - CP GAS PRIMARY CLEANING",
+      "364 - PGM RECYCLE",
+      "370 - OXYGEN",
+      "371 - LP GAS",
+      "372 - MILLED FUEL",
+      "373 - AUSMELT COOLING WATER",
+      "374 - BLOWER AIR",
+      "377 - PLANT AND INSTRUMENT AIR",
+      "380 - CP ENERGY RECOVERY",
+      "462 - ESKOM YARD",
+      "530 - ACID PLANT",
+      "531 - CP ACID NEUTRALISATION",
+      "534 - GAS DRYING, SO2 CONVERSION & ABSORPTION",
+      "535 - DENITRATION, ACID PRODUCTION AND NOX ABSORPTION",
+      "536 - ACID STORAGE AND LOADOUT",
+      "537 - CONTACT PLANT",
+      "540 - ACID PLANT EFFLUENT TREATMENT",
+      "541 - NEUTRALISED SLURRY HANDLING",
+      "542 - ACID PLANT",
+      "546 - ACID PLANT COOLING WATER",
+      "560 - ACID PLANT WORKSHOP",
+      "635 - E.F. GAS PRIMARY CLEANING",
+      "655 - WCM CRUSHING",
+      "722 - LANCE REPAIR BAY",
+      "801 - EFFLUENT DAM",
+      "820 - P.F. RETIEF LABORATORY"
+    ],
+    "SH": [
+      "100 - GENERAL & SITE DEVELOPMENT",
+      "115 - FIRE PROTECTION",
+      "200 - MILL WATER STORAGE",
+      "720 - WORKSHOPS"
+    ],
+    "PS": [
+      "100 - GENERAL AND SITE DEVELOPMENT",
+      "400 - GENERAL AND SITE DEVELOPMENT",
+      "410 - FURNACE",
+      "411 - MATTE GRANULATION AND STORAGE",
+      "412 - SLAG GRANULATION",
+      "413 - SLAG DUMP AND TRANSFER",
+      "415 - FIRE PROTECTION AND POTABLE WATER",
+      "431 - COAL RECEIVING",
+      "445 - SURFACE WATER PUMPING AND RECYCLING",
+      "447 - CONCENTRATE OFF-LOADING",
+      "448 - CONCENTRATE STORAGE",
+      "449 - FILTRATION PLANT",
+      "450 - SUBSTATION NO 1",
+      "451 - SUBSTATION NO 2",
+      "453 - MAIN CONSUMER SUBSTATION",
+      "455 - COMPRESSOR HOUSE",
+      "459 - 33KV YARD",
+      "464 - PLANT PIPE RACKS",
+      "470 - PLANT OFFICE",
+      "471 - PLANT WORKSHOPS",
+      "472 - PLANT STORE AND YARD",
+      "474 - GATEHOUSE AND WEIGHBRIDGE",
+      "476 - SEWAGE DISPOSAL",
+      "478 - CHANGEHOUSE, ABLUTIONS AND FIRST AID STATION",
+      "480 - OXYGEN STORAGE",
+      "481 - LP GAS STORAGE",
+      "482 - NITROGEN STORAGE",
+      "486 - REAGENT PLANT",
+      "490 - WATER RETICULATION",
+      "491 - LIME STORAGE",
+      "492 - FLASH DRYER NO 1",
+      "493 - FLASH DRYER NO 2",
+      "494 - DRY CONCENTRATE STORAGE SILO",
+      "497 - FURNACE OFF-GAS",
+      "498 - REVERTS HANDLING"
+    ],
+    "MS": [
+      "100 - GENERAL & SITE DEVELOPMENT",
+      "103 - ROADS & DRAINAGE",
+      "105 - PARKING",
+      "123 - PAINT STORE",
+      "125 - ENTRANCE & CHANGEHOUSES",
+      "150 - THICKENERS",
+      "171 - FIRE WATER RETICULATION",
+      "180 - FURNACE SUB STATION",
+      "182 - CONSUMER SUB & MCC",
+      "184 - WASTE SORTING",
+      "210 - TAILINGS THICKENING",
+      "230 - OFFICES",
+      "231 - CHANGEHOUSE",
+      "232 - CANTEEN",
+      "250 - CONCENTRATE STORAGE YARD",
+      "293 - MILL STORAGE SILOS",
+      "301 - NEW WEIGHBRIDGE",
+      "315 - COAL & FLUX RECEIVING & STORAGE",
+      "320 - CONCENTRATE HANDLING",
+      "321 - PASTE HANDLING",
+      "330 - COMPRESSOR HOUSE",
+      "345 - FLASH DRYER",
+      "350 - SMELTING",
+      "351 - CRUSHER PLANT",
+      "356 - CRUSHER PLANT MCC",
+      "370 - MASON STORE",
+      "371 - SLAG MILLING",
+      "372 - SLAG FLOTATION",
+      "378 - AUGER STATION",
+      "395 - SLAG DUMP",
+      "405 - CABLE YARD",
+      "406 - RIGGER STORE",
+      "407 - OIL STORE",
+      "410 - BOILERMAKER WORKSHOP",
+      "411 - FITTING & ELECTRICAL WORKSHOP",
+      "412 - HOP STORE",
+      "413 - INSTRUMENT WORKSHOP & STORE",
+      "414 - OFFGAS HANDLING",
+      "415 - POTABLE WATER",
+      "420 - PLANT OFFICES",
+      "421 - ASSAY & METALLURGICAL OFFICES",
+      "429 - WACS & WACSt RECEIVING & STORAGE",
+      "431 - COKE RECEIVING & STORAGE",
+      "444 - LAROX",
+      "445 - GOLDFIELDS",
+      "461 - MATERIAL HANDLING & DRYING",
+      "463 - SLAG AIR GRANULATION",
+      "481 - LP GAS",
+      "494 - DRY CONCENTRATE STORAGE SILO & DUST HANDLING"
+    ]
+  },
+  "categories": {
+    "PE": {
+      "name": "Process & Engineering Design",
+      "types": {
+        "FD": "Functional Descriptions",
+        "BFD": "Block Flow diagram",
+        "PFD": "PFD",
+        "PID": "PID",
+        "MBC": "Mass Balance Calcs",
+        "MPD": "Material Prop Datasheets"
+      }
+    },
+    "TE": {
+      "name": "Technical & Engineering",
+      "types": {
+        "DRW": "Drawings",
+        "RPT": "Reports",
+        "CAL": "Calculations",
+        "DS": "Datasheet"
+      }
+    },
+    "OS": {
+      "name": "Operations & Safety",
+      "types": {
+        "HAZ": "HAZOP",
+        "LOP": "LOPA",
+        "SDS": "SDS",
+        "SOP": "SOP",
+        "LOG": "LOGBOOK"
+      }
+    },
+    "MI": {
+      "name": "Maintenance, Inspection & Asset Integrity",
+      "types": {
+        "ITR": "Inspection & Testing Records",
+        "MM": "Maintenance Manuals",
+        "CR": "Calibration Reports"
+      }
+    },
+    "CH": {
+      "name": "Commission & Handover",
+      "types": {
+        "QAQC": "QAQC",
+        "PUN": "Punchlists",
+        "HA": "Handover Acceptance",
+        "PF": "PF Documents"
+      }
+    },
+    "LC": {
+      "name": "Legal & Compliance",
+      "types": {
+        "COC": "COC",
+        "PER": "Permits",
+        "APP": "Appointments",
+        "LTC": "Load Test Certificates"
+      }
+    }
+  }
 }
