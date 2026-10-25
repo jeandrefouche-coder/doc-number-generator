@@ -95,8 +95,12 @@ else:
         if not str(link_value).strip():
             st.error("Please select or enter a Process / Area / Asset")
         else:
-            link_code = link_value.split(" - ")[0] if " - " in str(link_value) else str(link_value)[:12]
-            number = f"{bu}-{plant}-AIM-{link_type[:3].upper()}-{link_code}-{cat}-{doc_type}-{int(seq):04d}"
+            # Build short code from the description (e.g. SLAG GRANULATION & HANDLING → SGH)
+            desc = link_value.split(" - ", 1)[-1] if " - " in str(link_value) else str(link_value)
+            words = [w for w in desc.replace("&", "").replace(",", "").split() if w.upper() not in ("AND", "THE", "OF", "FOR")]
+            link_code = "".join(w[0].upper() for w in words[:4]) or "XXX"
+            
+            number = f"{bu}-AIM-{cat}-{link_code}-{doc_type}-{int(seq):06d}"
             st.success("Generated AIM Number:")
             st.code(number)
             st.download_button("Download", number, file_name="aim_number.txt")
