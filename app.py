@@ -94,10 +94,13 @@ else:
         format_func=lambda c: type_dict[c]
     )
 
-    # Discipline (especially relevant for drawings)
-    disc_list = cfg.get("disciplines", [])
-    discipline = st.selectbox("Discipline", options=disc_list) if disc_list else ""
-    disc_code = discipline.split(" - ")[0].strip() if discipline and " - " in discipline else ""
+    # Discipline — only for Drawings
+    disc_code = ""
+    if doc_type in ("DRW", "Drawings") or (type_dict.get(doc_type, "").lower().startswith("drawing")):
+        disc_list = cfg.get("disciplines", [])
+        if disc_list:
+            discipline = st.selectbox("Discipline", options=disc_list)
+            disc_code = discipline.split(" - ")[0].strip() if " - " in discipline else ""
 
     seq = st.number_input("Sequential Number", min_value=1, value=1, step=1)
 
