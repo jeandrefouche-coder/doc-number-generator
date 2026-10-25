@@ -375,5 +375,20 @@
         "Process"
       ]
     }
-  }
+  },
+  "asset_types": [
+    "Conveyor",
+    "Pump",
+    "Fan",
+    "Valve",
+    "Motor",
+    "Crusher",
+    "Furnace",
+    "Tank",
+    "Filter",
+    "Compressor",
+    "Transformer",
+    "MCC",
+    "Other"
+  ]
 }
