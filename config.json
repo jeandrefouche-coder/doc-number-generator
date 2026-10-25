@@ -376,21 +376,21 @@
       ]
     }
   },
-  "asset_types": [
-    "Conveyor",
-    "Pump",
-    "Fan",
-    "Valve",
-    "Motor",
-    "Crusher",
-    "Furnace",
-    "Tank",
-    "Filter",
-    "Compressor",
-    "Transformer",
-    "MCC",
-    "Other"
-  ],
+  "asset_types": {
+    "CV": "Conveyor",
+    "PP": "Pump",
+    "FN": "Fan",
+    "VL": "Valve",
+    "MT": "Motor",
+    "CR": "Crusher",
+    "FNCE": "Furnace",
+    "TK": "Tank",
+    "FL": "Filter",
+    "CP": "Compressor",
+    "TR": "Transformer",
+    "MCC": "MCC",
+    "OT": "Other"
+  },
   "disciplines": [
     "01 - Civil",
     "02 - Architectural",
