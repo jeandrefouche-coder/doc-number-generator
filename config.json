@@ -400,5 +400,61 @@
     "07 - Vendor",
     "08 - Instrumentation",
     "09 - Electrical"
-  ]
+  ],
+  "pim": {
+    "project_types": [
+      "CAPEX",
+      "OPEX"
+    ],
+    "business_units": {
+      "GSML": {
+        "name": "Group Smelter",
+        "plants": {
+          "WS": "Waterval Smelter",
+          "CP": "Converter Plant",
+          "MS": "Mortimer Smelter",
+          "PS": "Polokwane Smelter"
+        }
+      },
+      "GCON": {
+        "name": "Group Concentrator",
+        "plants": {
+          "MS": "Mogalakwena South",
+          "MN": "Mogalakwena North"
+        }
+      },
+      "GREF": {
+        "name": "Group Refinery",
+        "plants": {
+          "PMR": "PMR",
+          "RBMR": "RBMR"
+        }
+      },
+      "GMINE": {
+        "name": "Group Mine",
+        "plants": {
+          "MT": "Mototolo",
+          "UN": "Unki"
+        }
+      }
+    },
+    "moc_examples": {
+      "WS": [
+        "WS00049",
+        "WS00123"
+      ],
+      "CP": [
+        "CP00049",
+        "CP00078"
+      ],
+      "MS": [
+        "MS00087",
+        "MS00102"
+      ],
+      "PS": [
+        "PS00780",
+        "PS00815"
+      ]
+    }
+  }
 }
