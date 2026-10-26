@@ -76,18 +76,15 @@ if is_pim:
             format_func=lambda c: f"{c} – {plants_pim[c]}"
         )
         
-        moc_list = pim_cfg.get("moc_examples", {}).get(plant_pim, [])
-        if moc_list:
-            moc = st.selectbox("MoC Number", options=moc_list)
-        else:
-            moc = st.text_input("MoC Number", placeholder=f"e.g. {plant_pim}00049")
+        moc_digits = st.text_input("MoC Number (5 digits)", placeholder="00087", max_chars=5)
         
         if st.button("Generate PIM Number", type="primary"):
-            if not moc.strip():
-                st.error("Please enter or select a MoC number")
+            if not moc_digits.strip() or not moc_digits.strip().isdigit() or len(moc_digits.strip()) != 5:
+                st.error("Please enter exactly 5 digits for the MoC number")
             else:
                 seq = random.randint(100000, 999999)
-                number = f"PIM-{bu_pim}-{moc.strip().upper()}-{seq:06d}"
+                moc = f"{plant_pim}{moc_digits.strip()}"
+                number = f"PIM-{bu_pim}-{moc}-{seq:06d}"
                 st.success("Generated PIM Number:")
                 st.code(number)
                 st.download_button("Download", number, file_name="pim_number.txt")
