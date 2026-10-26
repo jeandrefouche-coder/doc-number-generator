@@ -426,8 +426,8 @@
       "GREF": {
         "name": "Group Refinery",
         "plants": {
-          "PMR": "PMR",
-          "RBMR": "RBMR"
+          "PM": "PMR",
+          "BM": "RBMR"
         }
       },
       "GMINE": {
