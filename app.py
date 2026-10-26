@@ -45,7 +45,7 @@ if is_pim:
             st.error("Please enter a Vote Number")
         else:
             seq = random.randint(100000, 999999)
-            number = f"{bu}-{vote.strip().upper()}-{seq}"
+            number = f"{bu}-PIM-{vote.strip().upper()}-{seq}"
             st.success("Generated PIM Number:")
             st.code(number)
             st.download_button("Download", number, file_name="pim_number.txt")
