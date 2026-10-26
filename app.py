@@ -44,13 +44,19 @@ if is_pim:
     proj_type = st.radio("Project Type", pim_cfg.get("project_types", ["CAPEX", "OPEX"]), horizontal=True)
     
     if proj_type == "CAPEX":
+        bu_pim_codes = list(pim_cfg.get("business_units", {}).keys())
+        bu_pim = st.selectbox(
+            "Business Unit",
+            options=bu_pim_codes,
+            format_func=lambda c: f"{c} – {pim_cfg['business_units'][c]['name']}"
+        )
         vote = st.text_input("Vote Number", placeholder="e.g. CC24009")
         if st.button("Generate PIM Number", type="primary"):
             if not vote.strip():
                 st.error("Please enter a Vote Number")
             else:
                 seq = random.randint(100000, 999999)
-                number = f"PIM-{vote.strip().upper()}-{seq:06d}"
+                number = f"PIM-{bu_pim}-{vote.strip().upper()}-{seq:06d}"
                 st.success("Generated PIM Number:")
                 st.code(number)
                 st.download_button("Download", number, file_name="pim_number.txt")
