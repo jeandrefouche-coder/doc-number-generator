@@ -39,13 +39,40 @@ st.divider()
 
 if is_pim:
     st.subheader("PIM Path")
-    vote = st.text_input("Vote Number (Project Number)", placeholder="e.g. V2026-0142")
+    pim_cfg = cfg.get("pim", {})
+    
+    proj_type = st.radio("Project Type", pim_cfg.get("project_types", ["CAPEX", "OPEX"]), horizontal=True)
+    
+    bu_pim_codes = list(pim_cfg.get("business_units", {}).keys())
+    bu_pim = st.selectbox(
+        "Business Unit",
+        options=bu_pim_codes,
+        format_func=lambda c: f"{c} – {pim_cfg['business_units'][c]['name']}"
+    )
+    
+    plants_pim = pim_cfg["business_units"][bu_pim]["plants"]
+    plant_pim = st.selectbox(
+        "Plant",
+        options=list(plants_pim.keys()),
+        format_func=lambda c: f"{c} – {plants_pim[c]}"
+    )
+    
+    moc = ""
+    if proj_type == "OPEX":
+        moc_list = pim_cfg.get("moc_examples", {}).get(plant_pim, [])
+        if moc_list:
+            moc = st.selectbox("MoC Number", options=moc_list)
+        else:
+            moc = st.text_input("MoC Number", placeholder=f"e.g. {plant_pim}00049")
+    else:
+        moc = st.text_input("Vote / Project Number", placeholder="e.g. CC24009")
+    
     if st.button("Generate PIM Number", type="primary"):
-        if not vote.strip():
-            st.error("Please enter a Vote Number")
+        if not moc.strip():
+            st.error("Please enter or select a MoC / Vote number")
         else:
             seq = random.randint(100000, 999999)
-            number = f"{bu}-PIM-{vote.strip().upper()}-{seq}"
+            number = f"PIM-{bu_pim}-{moc.strip().upper()}-{seq:06d}"
             st.success("Generated PIM Number:")
             st.code(number)
             st.download_button("Download", number, file_name="pim_number.txt")
