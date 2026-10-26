@@ -419,8 +419,12 @@
       "GCON": {
         "name": "Group Concentrator",
         "plants": {
-          "MS": "Mogalakwena South",
-          "MN": "Mogalakwena North"
+          "MN": "Mogalakwena North Concentrator",
+          "MS": "Mogalakwena South Concentrator",
+          "AM": "Amandelbult Concentrators",
+          "MT": "Mototolo Concentrator",
+          "MD": "Modikwa Joint Venture Concentrator",
+          "UN": "Unki Concentrator"
         }
       },
       "GREF": {
@@ -428,13 +432,6 @@
         "plants": {
           "PM": "PMR",
           "BM": "RBMR"
-        }
-      },
-      "GMINE": {
-        "name": "Group Mine",
-        "plants": {
-          "MT": "Mototolo",
-          "UN": "Unki"
         }
       }
     },
